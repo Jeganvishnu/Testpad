@@ -1,0 +1,1150 @@
+/* Import custom utilities */
+@import './styles/utilities.css';
+@import './styles/animations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Enhanced Theme Variables - Warp Terminal Inspired */
+:root {
+  /* Light Theme Variables */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-quaternary: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-accent: #1e40af;
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --border-accent: #3b82f6;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Accent Colors - Light Mode */
+  --accent-primary: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #06b6d4;
+  --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+
+  /* Status Colors */
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --error: #ef4444;
+  --error-light: #fee2e2;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --info: #3b82f6;
+  --info-light: #dbeafe;
+}
+
+/* Dark Theme Variables - Enhanced Warp Terminal Colors with Better Balance */
+[data-theme="dark"],
+.dark {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1e1e1e;
+  --bg-quaternary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8b8;
+  --text-muted: #909090;
+  --text-accent: #00d9ff;
+  --border-primary: rgba(255, 255, 255, 0.12);
+  --border-secondary: rgba(255, 255, 255, 0.08);
+  --border-accent: #00d9ff;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6), 0 2px 4px -2px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.7), 0 4px 6px -4px rgb(0 0 0 / 0.7);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.8), 0 8px 10px -6px rgb(0 0 0 / 0.8);
+
+  /* Enhanced Warp Terminal Accent Colors with Better Contrast */
+  --accent-primary: #00d9ff;
+  --accent-secondary: #ff6b35;
+  --accent-tertiary: #00ff88;
+  --accent-gradient: linear-gradient(135deg, #00d9ff 0%, #ff6b35 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #00c4e6 0%, #e55a2b 100%);
+
+  /* Status Colors - Enhanced for Better Visibility */
+  --success: #00ff88;
+  --success-light: rgba(0, 255, 136, 0.15);
+  --error: #ff5f57;
+  --error-light: rgba(255, 95, 87, 0.15);
+  --warning: #ffbd2e;
+  --warning-light: rgba(255, 189, 46, 0.15);
+  --info: #00d9ff;
+  --info-light: rgba(0, 217, 255, 0.15);
+}
+
+/* Enhanced Smooth Fade Theme Transition Animation */
+.theme-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+
+  /* Create smoother gradient fade with better balance */
+  background: radial-gradient(ellipse at center,
+      var(--bg-primary) 0%,
+      var(--bg-secondary) 25%,
+      var(--bg-tertiary) 50%,
+      var(--bg-secondary) 75%,
+      var(--bg-primary) 100%);
+
+  /* Enhanced transition with better easing */
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.theme-transition-overlay.active {
+  opacity: 0.95;
+}
+
+.theme-transition-overlay.complete {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Enhanced smooth transition for body with balanced timing */
+body.theme-transitioning {
+  transition: background-color 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.theme-transitioning * {
+  transition: background-color 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.7s cubic-bezier(0.23, 1, 0.32, 1) !important;
+}
+
+/* Enhanced background grid effect for dark mode with balanced opacity */
+.bg-grid-dark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.025;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 120px 120px;
+  animation: gridFloat 25s ease-in-out infinite;
+}
+
+@keyframes gridFloat {
+
+  0%,
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(1px) translateY(-1px) rotate(0.5deg);
+  }
+
+  50% {
+    transform: translateX(-0.5px) translateY(0.5px) rotate(0deg);
+  }
+
+  75% {
+    transform: translateX(0.5px) translateY(-0.5px) rotate(-0.5deg);
+  }
+}
+
+/* Custom Dropdown Animation */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Global Theme Application */
+* {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Enhanced Background Gradients for Dark Mode - Balanced Warp Style */
+.dark body {
+  background: radial-gradient(ellipse at 25% 45%, rgba(0, 217, 255, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 25%, rgba(255, 107, 53, 0.025) 0%, transparent 55%),
+    radial-gradient(ellipse at 45% 85%, rgba(0, 255, 136, 0.015) 0%, transparent 65%),
+    radial-gradient(ellipse at 15% 85%, rgba(139, 92, 246, 0.02) 0%, transparent 50%),
+    #0A0A0A !important;
+}
+
+/* Comprehensive Tailwind Color Overrides */
+.bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+.bg-gray-50 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.bg-gray-100 {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.bg-gray-200 {
+  background-color: var(--bg-quaternary) !important;
+}
+
+.bg-gray-900 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.dark .bg-gray-900 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+.text-gray-700 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-500 {
+  color: var(--text-muted) !important;
+}
+
+.text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+.text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-100 {
+  color: var(--text-primary) !important;
+}
+
+.border-gray-200 {
+  border-color: var(--border-primary) !important;
+}
+
+.border-gray-300 {
+  border-color: var(--border-primary) !important;
+}
+
+.border-gray-700 {
+  border-color: var(--border-primary) !important;
+}
+
+/* Enhanced Shadow System */
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+/* Enhanced theme-aware utilities */
+.bg-themed {
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.bg-themed-secondary {
+  background-color: var(--bg-secondary);
+  transition: background-color 0.3s ease;
+}
+
+.text-themed {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.text-themed-secondary {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.border-themed {
+  border-color: var(--border-primary);
+  transition: border-color 0.3s ease;
+}
+
+.shadow-themed {
+  box-shadow: 0 4px 6px var(--shadow-primary);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Warp-inspired gradient text */
+.gradient-warp {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced button styles with theme support */
+.btn-warp {
+  background: var(--accent-gradient);
+  color: var(--text-primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-warp:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Enhanced Component Styles */
+.card-modern {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-modern:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-accent);
+}
+
+.dark .card-modern {
+  background: rgba(17, 24, 39, 0.8);
+  border-color: rgba(55, 65, 81, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.dark .card-modern:hover {
+  background: rgba(31, 41, 55, 0.9);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(17, 24, 39, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Navbar Styles */
+.navbar-modern {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.dark .navbar-modern {
+  background: rgba(10, 10, 10, 0.8) !important;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.4);
+}
+
+/* Static Gradient Backgrounds - Performance Optimized */
+.gradient-animated {
+  background: var(--accent-gradient);
+  /* Removed animation for better performance */
+}
+
+/* Enhanced Button Styles */
+.btn-modern {
+  position: relative;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-modern:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-modern:active {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Primary Button */
+.btn-primary-modern {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary-modern:hover {
+  background: var(--accent-gradient-hover);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Secondary Button */
+.btn-secondary-modern {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.btn-secondary-modern:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-primary);
+}
+
+.dark .btn-secondary-modern {
+  background: rgba(31, 41, 55, 0.6);
+  border-color: rgba(55, 65, 81, 0.5);
+}
+
+.dark .btn-secondary-modern:hover {
+  background: rgba(55, 65, 81, 0.8);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Status Indicators */
+.status-success {
+  color: var(--success);
+  background: var(--success-light);
+  border: 1px solid var(--success);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-error {
+  color: var(--error);
+  background: var(--error-light);
+  border: 1px solid var(--error);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-warning {
+  color: var(--warning);
+  background: var(--warning-light);
+  border: 1px solid var(--warning);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-info {
+  color: var(--info);
+  background: var(--info-light);
+  border: 1px solid var(--info);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Enhanced Form Styles - Fixed Contrast */
+.form-input-modern {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-primary) !important;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input-modern:focus {
+  outline: none !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.form-input-modern::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+.dark .form-input-modern {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark .form-input-modern:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1) !important;
+}
+
+.dark .form-input-modern::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+/* Override all input, select, textarea styling */
+input,
+select,
+textarea {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.1) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+/* Loading Animation */
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Floating Animation Removed for Performance */
+
+/* Score Progress Bars */
+.progress-bar {
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 8px;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: 20px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Removed shimmer animation for better performance */
+
+/* Chart.js Theme-Aware Styling */
+.chart-container {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.dark .chart-container {
+  background: var(--bg-tertiary);
+}
+
+/* Social Links Styling */
+.social-link {
+  display: flex;
+  align-items: center;
+  space: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.social-link:hover {
+  color: var(--accent-primary);
+  background: var(--bg-tertiary);
+}
+
+.dark .social-link:hover {
+  background: var(--bg-quaternary);
+}
+
+/* Enhanced table styling */
+.table-modern {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+}
+
+.table-modern thead {
+  background: var(--bg-tertiary);
+}
+
+.table-modern tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table-modern tbody tr:hover {
+  background: var(--bg-tertiary);
+}
+
+.dark .table-modern {
+  background: var(--bg-tertiary);
+  border-color: var(--border-primary);
+}
+
+.dark .table-modern thead {
+  background: var(--bg-quaternary);
+}
+
+.dark .table-modern tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Custom animations for test interface */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Custom animations for notifications */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-out {
+  animation: slide-out 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Ensure notifications appear above everything */
+.notification-container {
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  z-index: 999999 !important;
+  pointer-events: none !important;
+}
+
+/* Professional animations for auth forms - simplified */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.animate-fadeInScale {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+/* Professional gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   MOBILE-FIRST RESPONSIVE UTILITIES
+   ============================================ */
+
+/* Mobile Typography Scale */
+@media (max-width: 640px) {
+  .text-3xl {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  .text-xl {
+    font-size: 1.125rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  .text-lg {
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.125rem !important;
+    line-height: 1.5rem !important;
+  }
+}
+
+/* Mobile Spacing Utilities */
+.mobile-px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.mobile-py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.mobile-p-4 {
+  padding: 1rem;
+}
+
+.mobile-gap-4 {
+  gap: 1rem;
+}
+
+/* Mobile Touch Targets - Minimum 44x44px */
+@media (max-width: 640px) {
+
+  button,
+  .btn-modern,
+  a.btn-modern {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+    font-size: 0.9375rem;
+  }
+
+  .btn-modern {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile Card Optimizations */
+@media (max-width: 640px) {
+  .card-modern {
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .card-modern.p-4 {
+    padding: 1rem !important;
+  }
+
+  .card-modern.p-6 {
+    padding: 1.25rem !important;
+  }
+
+  .card-modern.p-8 {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Mobile Container Padding */
+@media (max-width: 640px) {
+
+  .max-w-4xl,
+  .max-w-6xl,
+  .max-w-7xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .px-6 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .px-8 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Mobile Grid Layouts */
+@media (max-width: 640px) {
+
+  .gap-4 {
+    gap: 0.75rem !important;
+  }
+
+  .gap-6 {
+    gap: 1rem !important;
+  }
+}
+
+/* Mobile Flex Utilities */
+@media (max-width: 640px) {
+  .mobile-flex-col {
+    flex-direction: column !important;
+  }
+
+  .mobile-items-start {
+    align-items: flex-start !important;
+  }
+
+  .mobile-w-full {
+    width: 100% !important;
+  }
+
+  .mobile-text-center {
+    text-align: center !important;
+  }
+}
+
+/* Mobile-Specific Display Utilities */
+.mobile-hidden {
+  display: block;
+}
+
+.mobile-show {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  .mobile-show {
+    display: block !important;
+  }
+}
+
+/* Prevent Horizontal Overflow */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+}
+
+/* Mobile Form Inputs */
+@media (max-width: 640px) {
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    /* Prevents zoom on iOS */
+    padding: 12px 16px !important;
+    min-height: 44px;
+  }
+
+  .form-input-modern {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+    min-height: 44px;
+  }
+}
+
+/* Mobile Modal/Panel Optimizations */
+@media (max-width: 768px) {
+  .fixed.right-0 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .md\:w-\[600px\] {
+    width: 100% !important;
+  }
+}
+
+/* Mobile-Optimized Shadows */
+@media (max-width: 640px) {
+
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: var(--shadow-lg) !important;
+  }
+}
+
+/* Mobile Progress Bars */
+@media (max-width: 640px) {
+  .progress-bar {
+    height: 10px;
+  }
+}
+
+/* Mobile Status Badges */
+@media (max-width: 640px) {
+
+  .status-success,
+  .status-error,
+  .status-warning,
+  .status-info {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+}
+
+background-clip: text;
+
+
+/* Input focus animations */
+.input-focus {
+  transition: all 0.3s ease;
+}
+
+.input-focus:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Button hover effects */
+.btn-professional {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-professional::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-professional:hover::before {
+  left: 100%;
+}
+
+/* Staggered animation delays */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* Smooth scrolling behavior */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar Styling for Answer Panel */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.5);
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.7);
+}
+
+/* Smooth momentum scrolling for answer panel */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}

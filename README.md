@@ -103,18 +103,21 @@
 ## 🛠️ Tech Stack
 
 ### Frontend Core
+
 - **React 18.3.1** - Component-based UI library
 - **TypeScript 5.5.3** - Type-safe development
 - **Vite 5.4.2** - Lightning-fast build tool
 - **React Router DOM 7.7.1** - Client-side routing
 
 ### Styling & UI
+
 - **TailwindCSS 3.4.1** - Utility-first CSS framework
 - **Custom CSS Animations** - Smooth transitions and effects
 - **Lucide React** - Modern icon library
 - **Dark Mode** - System-aware theme switching
 
 ### Backend & Services
+
 - **Firebase 12.0.0**
   - Authentication (Email/Password, Google)
   - Realtime Database (NoSQL)
@@ -123,16 +126,19 @@
 - **EmailJS** - Contact form emails
 
 ### Data Visualization
+
 - **Chart.js 4.5.0** - Interactive charts
 - **React Chart.js 2** - React wrapper
 
 ### Document Processing
+
 - **XLSX 0.18.5** - Excel file parsing
 - **PDF.js 5.4.54** - PDF text extraction
 - **jsPDF 3.0.3** - PDF generation
 - **html2canvas 1.4.1** - Screenshot capture
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **TypeScript ESLint** - TS-specific linting
 - **PostCSS** - CSS processing
@@ -143,6 +149,7 @@
 ## Features
 
 ### Student Features
+
 - Adaptive test-taking with real-time difficulty adjustment
 - Performance dashboard with charts and analytics
 - Test history and detailed results
@@ -153,6 +160,7 @@
 - Mobile-responsive design
 
 ### Admin Features
+
 - Test creation with manual/AI/bulk import
 - Question bank management
 - Student performance analytics
@@ -163,6 +171,7 @@
 - PDF result generation
 
 ### Technical Features
+
 - Real-time database synchronization
 - Custom sliding squares loader animation
 - Smooth page transitions
@@ -451,6 +460,7 @@ optimum/
 **Location**: `src/services/adaptiveTestService.ts`
 
 **Algorithm**:
+
 ```typescript
 // Difficulty progression logic
 if (correctStreak >= 2) {
@@ -463,11 +473,12 @@ if (correctStreak >= 2) {
 const points = {
   easy: 1,
   medium: 2,
-  hard: 3
+  hard: 3,
 };
 ```
 
 **Features**:
+
 - Real-time difficulty adjustment
 - Streak-based progression
 - Weighted scoring system
@@ -478,6 +489,7 @@ const points = {
 **Location**: `src/services/aiService.ts`
 
 **Process**:
+
 1. PDF text extraction using PDF.js
 2. Text chunking (max 4000 chars)
 3. OpenRouter API call with prompt engineering
@@ -485,6 +497,7 @@ const points = {
 5. Question validation and formatting
 
 **Supported Models**:
+
 - DeepSeek R1 (default)
 - GPT-4
 - Claude 3
@@ -494,6 +507,7 @@ const points = {
 **Location**: `src/services/performanceTrackingService.ts`
 
 **Metrics**:
+
 - Average score calculation
 - Test completion rate
 - Performance trends
@@ -505,6 +519,7 @@ const points = {
 **Location**: `src/hooks/useTestProctor.ts`
 
 **Features**:
+
 - Tab switch detection
 - Fullscreen monitoring
 - Violation tracking
@@ -547,6 +562,7 @@ App
 ### Key Components
 
 #### TestInterface
+
 - Manages test state
 - Implements adaptive logic
 - Handles proctoring
@@ -554,12 +570,14 @@ App
 - Question navigation
 
 #### PerformanceTracker
+
 - Fetches performance data
 - Renders charts (Chart.js)
 - Calculates metrics
 - Displays trends
 
 #### CreateTestModal
+
 - Test creation form
 - Question management
 - AI generation integration
@@ -572,6 +590,7 @@ App
 ### Context API
 
 **AuthContext** (`src/contexts/AuthContext.tsx`):
+
 ```typescript
 interface AuthContextType {
   currentUser: User | null;
@@ -605,6 +624,7 @@ Firebase DB → Service Layer → Component State → UI
 ### Firebase Realtime Database
 
 **Structure**:
+
 ```json
 {
   "users": {
@@ -650,6 +670,7 @@ Firebase DB → Service Layer → Component State → UI
 **Endpoint**: `https://openrouter.ai/api/v1/chat/completions`
 
 **Request**:
+
 ```typescript
 {
   model: "deepseek/deepseek-r1",
@@ -667,6 +688,7 @@ Firebase DB → Service Layer → Component State → UI
 ### TailwindCSS Configuration
 
 **Custom Theme** (`tailwind.config.js`):
+
 ```javascript
 theme: {
   extend: {
@@ -685,12 +707,22 @@ theme: {
 ### Custom Animations
 
 **Sliding Squares Loader** (`src/styles/animations.css`):
+
 ```css
 @keyframes slide-square-loader-1 {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(0, 32px); }
-  50% { transform: translate(32px, 32px); }
-  75% { transform: translate(32px, 0); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, 32px);
+  }
+  50% {
+    transform: translate(32px, 32px);
+  }
+  75% {
+    transform: translate(32px, 0);
+  }
 }
 
 .sliding-squares-loader {
@@ -702,6 +734,7 @@ theme: {
 ### Dark Mode
 
 **Implementation**:
+
 - System preference detection
 - localStorage persistence
 - CSS variables for theming
@@ -725,10 +758,12 @@ theme: {
 ### Test Accounts
 
 **Admin**:
+
 - Email: `admin@gmail.com`
 - Password: `admin@123`
 
 **Student**:
+
 - Email: `student@gmail.com`
 - Password: `student@123`
 
@@ -744,11 +779,10 @@ theme: {
 4. Deploy
 
 **Configuration** (`vercel.json`):
+
 ```json
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
 ```
 
@@ -820,19 +854,3 @@ MIT License - see [LICENSE](LICENSE) file
 - OpenRouter for AI capabilities
 
 ---
-
-## 📞 Support
-
-- **Email**: optimum-test@gmail.com
-- **Issues**: [GitHub Issues](https://github.com/nareshAiNexus/Optimum-test/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/nareshAiNexus/Optimum-test/discussions)
-
----
-
-<div align="center">
-
-**Made with by the Testpad Team**
-
-[Report Bug](https://github.com/nareshAiNexus/Optimum-test/issues) · [Request Feature](https://github.com/nareshAiNexus/Optimum-test/issues)
-
-</div>

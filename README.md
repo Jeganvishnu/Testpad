@@ -1,8 +1,8 @@
-# OPTIMUM - Adaptive Testing System
+# Testpad - Adaptive Testing System
 
 <div align="center">
 
-![OPTIMUM Logo](public/optimum.png)
+![Testpad Logo](public/optimum.png)
 
 **A modern, AI-powered adaptive testing platform for educational institutions**
 
@@ -41,7 +41,7 @@
 
 ## 🎯 Overview
 
-**OPTIMUM** is a comprehensive Adaptive Testing System built with modern web technologies. It features intelligent difficulty adjustment, AI-powered question generation, real-time analytics, proctoring capabilities, and a premium user interface with smooth animations.
+**Testpad** is a comprehensive Adaptive Testing System built with modern web technologies. It features intelligent difficulty adjustment, AI-powered question generation, real-time analytics, proctoring capabilities, and a premium user interface with smooth animations.
 
 ### Key Highlights
 
@@ -293,7 +293,7 @@ Application will be available at `http://localhost:5173`
 1. Go to **Project Settings** (gear icon)
 2. Scroll to "Your apps"
 3. Click web icon (`</>`)
-4. Register app name: `OPTIMUM`
+4. Register app name: `Testpad`
 5. Copy configuration values to `.env`
 
 ---
@@ -831,7 +831,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with by the OPTIMUM Team**
+**Made with by the Testpad Team**
 
 [Report Bug](https://github.com/nareshAiNexus/Optimum-test/issues) · [Request Feature](https://github.com/nareshAiNexus/Optimum-test/issues)
 
